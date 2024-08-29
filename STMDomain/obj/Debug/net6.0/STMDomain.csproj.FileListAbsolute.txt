@@ -1,0 +1,12 @@
+C:\Users\will_\source\repos\STMSystem\STMDomain\bin\Debug\net6.0\STMDomain.deps.json
+C:\Users\will_\source\repos\STMSystem\STMDomain\bin\Debug\net6.0\STMDomain.dll
+C:\Users\will_\source\repos\STMSystem\STMDomain\bin\Debug\net6.0\STMDomain.pdb
+C:\Users\will_\source\repos\STMSystem\STMDomain\obj\Debug\net6.0\STMDomain.csproj.AssemblyReference.cache
+C:\Users\will_\source\repos\STMSystem\STMDomain\obj\Debug\net6.0\STMDomain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\will_\source\repos\STMSystem\STMDomain\obj\Debug\net6.0\STMDomain.AssemblyInfoInputs.cache
+C:\Users\will_\source\repos\STMSystem\STMDomain\obj\Debug\net6.0\STMDomain.AssemblyInfo.cs
+C:\Users\will_\source\repos\STMSystem\STMDomain\obj\Debug\net6.0\STMDomain.csproj.CoreCompileInputs.cache
+C:\Users\will_\source\repos\STMSystem\STMDomain\obj\Debug\net6.0\STMDomain.dll
+C:\Users\will_\source\repos\STMSystem\STMDomain\obj\Debug\net6.0\refint\STMDomain.dll
+C:\Users\will_\source\repos\STMSystem\STMDomain\obj\Debug\net6.0\STMDomain.pdb
+C:\Users\will_\source\repos\STMSystem\STMDomain\obj\Debug\net6.0\ref\STMDomain.dll

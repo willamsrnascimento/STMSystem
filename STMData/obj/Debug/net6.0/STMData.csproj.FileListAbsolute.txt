@@ -1,0 +1,17 @@
+C:\Users\will_\source\repos\STMSystem\STMData\bin\Debug\net6.0\STMData.deps.json
+C:\Users\will_\source\repos\STMSystem\STMData\bin\Debug\net6.0\STMData.runtimeconfig.json
+C:\Users\will_\source\repos\STMSystem\STMData\bin\Debug\net6.0\STMData.dll
+C:\Users\will_\source\repos\STMSystem\STMData\bin\Debug\net6.0\STMData.pdb
+C:\Users\will_\source\repos\STMSystem\STMData\bin\Debug\net6.0\STMDomain.dll
+C:\Users\will_\source\repos\STMSystem\STMData\bin\Debug\net6.0\STMDomain.pdb
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\STMData.csproj.AssemblyReference.cache
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\STMData.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\STMData.AssemblyInfoInputs.cache
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\STMData.AssemblyInfo.cs
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\STMData.csproj.CoreCompileInputs.cache
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\STMData.csproj.CopyComplete
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\STMData.dll
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\refint\STMData.dll
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\STMData.pdb
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\STMData.genruntimeconfig.cache
+C:\Users\will_\source\repos\STMSystem\STMData\obj\Debug\net6.0\ref\STMData.dll
