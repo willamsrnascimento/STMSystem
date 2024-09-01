@@ -18,8 +18,17 @@ namespace STMData
         {
             base.OnModelCreating(builder);
 
-            builder.ApplyConfiguration(new PersonalDataconfiguration());
+            builder.ApplyConfiguration(new PersonalDataConfiguration());
             builder.ApplyConfiguration(new StatusConfiguration());
+            builder.ApplyConfiguration(new AddressConfiguration());
+            builder.ApplyConfiguration(new ContactConfiguration());
+            builder.ApplyConfiguration(new EducationConfiguration());
+            builder.ApplyConfiguration(new FamilyDataConfiguration());
+            builder.ApplyConfiguration(new GenderIdentityConfiguration());
+            builder.ApplyConfiguration(new MaritalStatusConfiguration());
+            builder.ApplyConfiguration(new SexualOrientationConfiguration());
+            builder.ApplyConfiguration(new SocialProgramConfiguration());
+
         }
 
     }

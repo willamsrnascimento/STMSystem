@@ -10,5 +10,6 @@
         public string City { get; set; }
         public string State { get; set; }
         public string ResidenceTime { get; set; }
+        public PersonalData PersonalData { get; set; }
     }
 }
