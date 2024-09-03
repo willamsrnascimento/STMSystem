@@ -1,4 +1,5 @@
-﻿using STMApi.Services.Interfaces;
+﻿using STMApi.Exceptions;
+using STMApi.Services.Interfaces;
 using STMData.Repositories.Interfaces;
 using STMDomain.Domain;
 
@@ -15,27 +16,62 @@ namespace STMApi.Services.Implementations
 
         public async Task CreateAsync(PersonalData entity)
         {
-            await _personalDataRepository.CreateAsync(entity);
+            try
+            {
+                await _personalDataRepository.CreateAsync(entity);
+            }
+            catch (DbConcurrencyException)
+            {
+                throw new DbConcurrencyException("Error on conecting to database.");
+            }
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(long id)
         {
-            await _personalDataRepository.DeleteAsync(id);
+            try
+            {
+                await _personalDataRepository.DeleteAsync(id);
+            }
+            catch (DbConcurrencyException)
+            {
+                throw new DbConcurrencyException("Error on conecting to database.");
+            }
         }
 
         public async Task<IEnumerable<PersonalData>> GetAllAsync()
         {
-            return await _personalDataRepository.GetAllAsync();
+            try
+            {
+                return await _personalDataRepository.GetAllAsync();
+            }
+            catch (DbConcurrencyException)
+            {
+                throw new DbConcurrencyException("Error on conecting to database.");
+            }
         }
 
-        public async Task<PersonalData> GetByIdAsync(int id)
+        public async Task<PersonalData> GetByIdAsync(long id)
         {
-            return await _personalDataRepository.GetByIdAsync(id);
+            try
+            {
+                return await _personalDataRepository.GetByIdAsync(id);
+            }
+            catch (DbConcurrencyException)
+            {
+                throw new DbConcurrencyException("Error on conecting to database.");
+            }
         }
 
         public async Task UpdateAsync(PersonalData entity)
         {
-            await _personalDataRepository.UpdateAsync(entity);
+            try
+            {
+                await _personalDataRepository.UpdateAsync(entity);
+            }
+            catch (DbConcurrencyException)
+            {
+                throw new DbConcurrencyException("Error on conecting to database.");
+            }
         }
     }
 }

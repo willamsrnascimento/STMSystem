@@ -1,17 +1,21 @@
-using STMApi.Endpoints;
-using Microsoft.EntityFrameworkCore;
+
 using STMData;
+
+using STMData.DependencyInjection;
+using STMApi.Endpoints;
+using STMApi.DependencyInjection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddSqlServer<STMDbContext>(builder.Configuration["Database:ConnectionString"]);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddDependencyInjectionApi();
+builder.Services.AddDependencyInjectionData();
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
 
@@ -24,5 +28,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.EndpointConfigure();
+
 
 app.Run();

@@ -21,11 +21,11 @@ namespace STMData.Repositories.Implementations
         public async Task CreateAsync(PersonalData entity)
         {
             entity.CreatedBy = "Process";
-            _context.PersonalDatas.Add(entity);
+            await _context.PersonalDatas.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(long id)
         {
             var personalData = await _context.PersonalDatas.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -42,10 +42,13 @@ namespace STMData.Repositories.Implementations
         {
             if (! await _context.PersonalDatas.AnyAsync())
             {
-                return null;
+                throw new DbDataNotFoundException("No data found.");
             }
 
-            return await _context.PersonalDatas.ToListAsync();
+            return await _context.PersonalDatas
+                                .Include(p => p.Education)
+                                .Include(p => p.GenderIdentity)
+                                .ToListAsync();
         }
 
         public async Task<PersonalData> GetByCPF(string cpf)
@@ -60,13 +63,13 @@ namespace STMData.Repositories.Implementations
             return personalData;
         }
 
-        public async Task<PersonalData> GetByIdAsync(int id)
+        public async Task<PersonalData> GetByIdAsync(long id)
         {
-            var personalData = await _context.PersonalDatas.FirstOrDefaultAsync(p => p.id == id);
+            var personalData = await _context.PersonalDatas.FirstOrDefaultAsync(p => p.Id == id);
 
             if (personalData == null)
             {
-                throw new DbDataNotFoundException($"No data found for the cpf: {id}");
+                throw new DbDataNotFoundException($"No data found for the id : {id}");
             }
 
             return personalData;
