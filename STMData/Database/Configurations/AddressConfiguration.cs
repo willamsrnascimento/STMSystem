@@ -9,16 +9,33 @@ namespace STMData.Database.Configurations
         public void Configure(EntityTypeBuilder<Address> builder)
         {
             builder.ToTable("Address");
+
             builder.HasKey(a => a.Id);
+
+            builder.Property(a => a.CEP)
+                .HasMaxLength(12);
+
             builder.Property(a => a.Place)
                 .IsRequired()
-                .HasMaxLength(256);
+                .HasMaxLength(128);
+
+            builder.Property(a => a.Number)
+                .HasMaxLength(10);
+
+            builder.Property(a => a.Complement)
+                .HasMaxLength(55);
+
             builder.Property(a => a.City)
                 .IsRequired()
                 .HasMaxLength(128);
+
             builder.Property(a => a.Neighborhood)
                 .IsRequired()
                 .HasMaxLength(128);
+
+            builder.Property(a => a.ResidenceTime)
+                .HasMaxLength(15);
+
             builder.Property(a => a.State)
                 .IsRequired()
                 .HasMaxLength(128);

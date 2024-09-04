@@ -47,6 +47,21 @@
           "lib/net6.0/Humanizer.dll": {}
         }
       },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.33": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.35.0"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/6.0.33": {
         "type": "package",
         "compile": {
@@ -1023,6 +1038,16 @@
           }
         }
       },
+      "STMComunication/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/STMComunication.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/STMComunication.dll": {}
+        }
+      },
       "STMData/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -1110,6 +1135,21 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.33": {
+      "sha512": "eGWABTtGDLVDlEOuvh6SU3LHV0a2nZCkrYOy41OHFkF3mnLyH6NTL7/DDrrF0sbB7gSGDhoZJ0PasIc14rVSAA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.33",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll",
+        "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.xml",
+        "microsoft.aspnetcore.authentication.jwtbearer.6.0.33.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.jwtbearer.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Cryptography.Internal/6.0.33": {
@@ -3358,6 +3398,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "STMComunication/1.0.0": {
+      "type": "project",
+      "path": "../STMComunication/STMComunication.csproj",
+      "msbuildProject": "../STMComunication/STMComunication.csproj"
+    },
     "STMData/1.0.0": {
       "type": "project",
       "path": "../STMData/STMData.csproj",
@@ -3371,9 +3416,11 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.33",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.20",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.20",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.20",
+      "STMComunication >= 1.0.0",
       "STMData >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
@@ -3410,6 +3457,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\will_\\source\\repos\\STMSystem\\STMComunication\\STMComunication.csproj": {
+              "projectPath": "C:\\Users\\will_\\source\\repos\\STMSystem\\STMComunication\\STMComunication.csproj"
+            },
             "C:\\Users\\will_\\source\\repos\\STMSystem\\STMData\\STMData.csproj": {
               "projectPath": "C:\\Users\\will_\\source\\repos\\STMSystem\\STMData\\STMData.csproj"
             }
@@ -3426,6 +3476,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[6.0.33, )"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",

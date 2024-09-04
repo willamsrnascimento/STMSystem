@@ -8,9 +8,11 @@
     ".NETCoreApp,Version=v6.0": {
       "STMApi/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.33",
           "Microsoft.EntityFrameworkCore.Design": "7.0.20",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.20",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.20",
+          "STMComunication": "1.0.0",
           "STMData": "1.0.0",
           "Swashbuckle.AspNetCore": "6.5.0"
         },
@@ -57,6 +59,17 @@
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.33": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.35.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "assemblyVersion": "6.0.33.0",
+            "fileVersion": "6.0.3324.37905"
           }
         }
       },
@@ -758,6 +771,11 @@
           }
         }
       },
+      "STMComunication/1.0.0": {
+        "runtime": {
+          "STMComunication.dll": {}
+        }
+      },
       "STMData/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.33",
@@ -802,6 +820,13 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.33": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eGWABTtGDLVDlEOuvh6SU3LHV0a2nZCkrYOy41OHFkF3mnLyH6NTL7/DDrrF0sbB7gSGDhoZJ0PasIc14rVSAA==",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.33",
+      "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.6.0.33.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/6.0.33": {
       "type": "package",
@@ -1285,6 +1310,11 @@
       "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
+    },
+    "STMComunication/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "STMData/1.0.0": {
       "type": "project",

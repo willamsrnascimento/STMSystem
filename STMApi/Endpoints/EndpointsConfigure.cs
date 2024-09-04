@@ -1,12 +1,20 @@
-﻿namespace STMApi.Endpoints
+﻿using STMApi.Endpoints.UserEndpoint;
+using STMApi.Endpoints.UserEndpoit;
+
+namespace STMApi.Endpoints
 {
     public static class EndpointsConfigure
     {
-        private static string Template = "/PersonalDatas";
+        private static string TemplatePersonalData = "/PersonalDatas";
+        private static string TemplateLogin = "/Login";
+        private static string TemplateUser = "/User";
         public static void EndpointConfigure(this WebApplication app)
         {
-            app.MapGet(Template, PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetAllAsync);
-            app.MapGet(Template + "{id:long}", PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetByIdAsync);
+            app.MapGet(TemplatePersonalData, PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetAllAsync);
+            app.MapGet(TemplatePersonalData + "{id:long}", PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetByIdAsync);
+            app.MapGet(TemplateLogin, LoginReadOnlyEndpoint.Login);
+            app.MapPost(TemplateUser, UserWriteOnlyEndpoint.CreateUserAsync);
+
         }
     }
 }
