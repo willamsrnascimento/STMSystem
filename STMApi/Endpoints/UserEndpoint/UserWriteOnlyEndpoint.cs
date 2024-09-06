@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using STMApi.Services.Implementations;
+using STMApi.Services.Interfaces;
 using STMComunication.Dtos;
 
 namespace STMApi.Endpoints.UserEndpoint
 {
     public static class UserWriteOnlyEndpoint
     {
-        public static async Task<IResult> CreateUserAsync([FromBody] UserRequestDto userRequestDto, UserService userService)
+        //[AllowAnonymous]
+        public static async Task<IResult> CreateUserAsync([FromBody] UserRequestDto userRequestDto, IUserService userService)
         {
             var result = await userService.CreateUserAsync(userRequestDto);
 

@@ -7,6 +7,7 @@ C:\Users\will_\source\repos\STMSystem\STMApi\bin\Debug\net6.0\STMApi.dll
 C:\Users\will_\source\repos\STMSystem\STMApi\bin\Debug\net6.0\STMApi.pdb
 C:\Users\will_\source\repos\STMSystem\STMApi\bin\Debug\net6.0\Azure.Core.dll
 C:\Users\will_\source\repos\STMSystem\STMApi\bin\Debug\net6.0\Azure.Identity.dll
+C:\Users\will_\source\repos\STMSystem\STMApi\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\will_\source\repos\STMSystem\STMApi\bin\Debug\net6.0\Humanizer.dll
 C:\Users\will_\source\repos\STMSystem\STMApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\will_\source\repos\STMSystem\STMApi\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll

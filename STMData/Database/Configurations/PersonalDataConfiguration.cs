@@ -31,11 +31,15 @@ namespace STMData.Database.Configurations
             builder.Property(p => p.Occupancy)
                 .HasMaxLength(128);
 
+            builder.Property(p => p.ResponsibleCpf)
+                .HasMaxLength(15)
+                .IsRequired(false);
+
             builder.HasMany(p => p.SocialPrograms)
                 .WithMany(s => s.PersonalDatas)
                 .UsingEntity(
                     "PersonalDataSocialProgram",
-                    p => p.HasOne(typeof(SocialProgram)).WithMany().HasForeignKey("SocialProgramId").HasPrincipalKey(nameof(SocialProgram.Id)).OnDelete(DeleteBehavior.Restrict),
+                    p => p.HasOne(typeof(SocialBenefits)).WithMany().HasForeignKey("SocialProgramId").HasPrincipalKey(nameof(SocialBenefits.Id)).OnDelete(DeleteBehavior.Restrict),
                     s => s.HasOne(typeof(PersonalData)).WithMany().HasForeignKey("PersonalDataId").HasPrincipalKey(nameof(PersonalData.Id)).OnDelete(DeleteBehavior.Restrict)
                 ); ;
 

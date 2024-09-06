@@ -1,4 +1,4 @@
-﻿using STMApi.Exceptions;
+﻿using STMApi.Errors.Exceptions;
 using STMApi.Services.Interfaces;
 using STMData.Repositories.Interfaces;
 using STMDomain.Domain;

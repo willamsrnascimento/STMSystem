@@ -10,14 +10,14 @@
         public long? EducationId { get; set; }
         public Education? Education { get; set; }
         public long? GenderIdentityId { get; set; }
-        public GenderIdentity? GenderIdentity { get; set; }
+        public Gender? GenderIdentity { get; set; }
         public long? SexualOrientationId { get; set; }
         public SexualOrientation? SexualOrientation { get; set; }
         public long? MaritalStatusId { get; set; }
         public MaritalStatus? MaritalStatus { get; set; }
-        public long? ResponsibleId { get; set; }
+        public string? ResponsibleCpf { get; set; }
         public ICollection<Contact> Contacts { get; set; }
-        public ICollection<SocialProgram> SocialPrograms { get; set; }
+        public ICollection<SocialBenefits> SocialPrograms { get; set; }
         public long AddressId { get; set; }
         public Address Address { get; set; }
         public long? FamilyDataId { get; set; }

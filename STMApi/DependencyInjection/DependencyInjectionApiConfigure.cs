@@ -8,7 +8,7 @@ namespace STMApi.DependencyInjection
         public static void AddDependencyInjectionApi(this IServiceCollection services)
         {
             services.AddScoped<IPersonalDataService, PersonalDataService>();
-            services.AddScoped<UserService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

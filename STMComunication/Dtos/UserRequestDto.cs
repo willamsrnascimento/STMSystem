@@ -16,7 +16,6 @@ namespace STMComunication.Dtos
         {
             return Email.Substring(0, Email.IndexOf("@"));
         }
-
         
     }
 }

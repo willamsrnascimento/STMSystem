@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using STMApi.Errors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,10 +64,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-
-
 app.UseHttpsRedirection();
+app.UseErrorsConfigure();
 app.EndpointConfigure();
 
 

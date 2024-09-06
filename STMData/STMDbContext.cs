@@ -9,6 +9,7 @@ namespace STMData
     public class STMDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<PersonalData> PersonalDatas { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         public STMDbContext(DbContextOptions<STMDbContext> options) : base(options)
         {
@@ -24,10 +25,10 @@ namespace STMData
             builder.ApplyConfiguration(new ContactConfiguration());
             builder.ApplyConfiguration(new EducationConfiguration());
             builder.ApplyConfiguration(new FamilyDataConfiguration());
-            builder.ApplyConfiguration(new GenderIdentityConfiguration());
+            builder.ApplyConfiguration(new GenderConfiguration());
             builder.ApplyConfiguration(new MaritalStatusConfiguration());
             builder.ApplyConfiguration(new SexualOrientationConfiguration());
-            builder.ApplyConfiguration(new SocialProgramConfiguration());
+            builder.ApplyConfiguration(new SocialBenefitsConfiguration());
 
         }
 

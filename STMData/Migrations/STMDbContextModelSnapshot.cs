@@ -418,10 +418,10 @@ namespace STMData.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("FamilyRevenue")
+                    b.Property<decimal>("FamilyRevenue")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0f);
+                        .HasColumnType("decimal(10,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<bool>("IsSoloParent")
                         .HasColumnType("bit");
@@ -449,7 +449,7 @@ namespace STMData.Migrations
                     b.ToTable("FamilyData", (string)null);
                 });
 
-            modelBuilder.Entity("STMDomain.Domain.GenderIdentity", b =>
+            modelBuilder.Entity("STMDomain.Domain.Gender", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -484,7 +484,7 @@ namespace STMData.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("GenderIdentity", (string)null);
+                    b.ToTable("Gender", (string)null);
                 });
 
             modelBuilder.Entity("STMDomain.Domain.MaritalStatus", b =>
@@ -578,8 +578,9 @@ namespace STMData.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<long?>("ResponsibleId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("ResponsibleCpf")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<long?>("SexualOrientationId")
                         .HasColumnType("bigint");
@@ -654,7 +655,7 @@ namespace STMData.Migrations
                     b.ToTable("SexualOrientation", (string)null);
                 });
 
-            modelBuilder.Entity("STMDomain.Domain.SocialProgram", b =>
+            modelBuilder.Entity("STMDomain.Domain.SocialBenefits", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -699,7 +700,7 @@ namespace STMData.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("SocialProgrma", (string)null);
+                    b.ToTable("SocialBenefits", (string)null);
                 });
 
             modelBuilder.Entity("STMDomain.Domain.Status", b =>
@@ -802,7 +803,7 @@ namespace STMData.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("STMDomain.Domain.SocialProgram", null)
+                    b.HasOne("STMDomain.Domain.SocialBenefits", null)
                         .WithMany()
                         .HasForeignKey("SocialProgramId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -860,7 +861,7 @@ namespace STMData.Migrations
                     b.Navigation("Status");
                 });
 
-            modelBuilder.Entity("STMDomain.Domain.GenderIdentity", b =>
+            modelBuilder.Entity("STMDomain.Domain.Gender", b =>
                 {
                     b.HasOne("STMDomain.Domain.Status", "Status")
                         .WithMany()
@@ -898,7 +899,7 @@ namespace STMData.Migrations
                         .WithOne("PersonalData")
                         .HasForeignKey("STMDomain.Domain.PersonalData", "FamilyDataId");
 
-                    b.HasOne("STMDomain.Domain.GenderIdentity", "GenderIdentity")
+                    b.HasOne("STMDomain.Domain.Gender", "GenderIdentity")
                         .WithMany("PersonalDatas")
                         .HasForeignKey("GenderIdentityId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -945,7 +946,7 @@ namespace STMData.Migrations
                     b.Navigation("Status");
                 });
 
-            modelBuilder.Entity("STMDomain.Domain.SocialProgram", b =>
+            modelBuilder.Entity("STMDomain.Domain.SocialBenefits", b =>
                 {
                     b.HasOne("STMDomain.Domain.Status", "Status")
                         .WithMany()
@@ -973,7 +974,7 @@ namespace STMData.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("STMDomain.Domain.GenderIdentity", b =>
+            modelBuilder.Entity("STMDomain.Domain.Gender", b =>
                 {
                     b.Navigation("PersonalDatas");
                 });

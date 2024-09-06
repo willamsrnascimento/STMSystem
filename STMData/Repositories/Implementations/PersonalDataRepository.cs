@@ -21,6 +21,12 @@ namespace STMData.Repositories.Implementations
         public async Task CreateAsync(PersonalData entity)
         {
             entity.CreatedBy = "Process";
+
+            if(entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
             await _context.PersonalDatas.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
@@ -84,6 +90,10 @@ namespace STMData.Repositories.Implementations
 
         public async Task UpdateAsync(PersonalData entity)
         {
+            if(entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
             entity.UpdatedOn = DateTime.Now;
             entity.UpdatedBy = "Process";
             

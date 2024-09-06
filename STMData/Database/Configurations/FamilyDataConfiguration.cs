@@ -21,7 +21,8 @@ namespace STMData.Database.Configurations
                 .HasPrecision(0, 20);
 
             builder.Property(f => f.FamilyRevenue)
-                .HasDefaultValue(0);
+                .HasDefaultValue(0)
+                .HasColumnType("decimal(10,2)");
 
         }
     }

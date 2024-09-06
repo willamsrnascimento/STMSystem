@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using STMApi.Security.Token;
+using STMApi.Services.Interfaces;
 using STMComunication.Dtos;
 using System.Security.Claims;
 
 namespace STMApi.Services.Implementations
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -14,23 +15,18 @@ namespace STMApi.Services.Implementations
             _userManager = userManager;
         }
 
-        public async Task<string> UserLogin(LoginRequestDto loginDto)
+        public async Task<string> UserLoginAsync(LoginRequestDto loginDto)
         {
-            var user = await _userManager.FindByNameAsync(loginDto.userName);
-            
-            if (user == null)
-            {
-                return string.Empty;
-            }
+            var user = await _userManager.FindByNameAsync(loginDto.UserName);
 
-            if(! await _userManager.CheckPasswordAsync(user, loginDto.password))
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
-                return string.Empty;
+                return null;
             }
 
             var subject = new ClaimsIdentity(new Claim[]
             {
-                new Claim(ClaimTypes.Name, loginDto.userName),
+                new Claim(ClaimTypes.Name, loginDto.UserName),
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
             });
 
@@ -48,6 +44,6 @@ namespace STMApi.Services.Implementations
             }
 
             return newUser.Id;
-        } 
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace STMApi.Endpoints
         {
             app.MapGet(TemplatePersonalData, PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetAllAsync);
             app.MapGet(TemplatePersonalData + "{id:long}", PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetByIdAsync);
-            app.MapGet(TemplateLogin, LoginReadOnlyEndpoint.Login);
+            app.MapPost(TemplateLogin, LoginReadOnlyEndpoint.Login);
             app.MapPost(TemplateUser, UserWriteOnlyEndpoint.CreateUserAsync);
 
         }
