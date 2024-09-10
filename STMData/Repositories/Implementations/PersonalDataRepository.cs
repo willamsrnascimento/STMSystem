@@ -2,11 +2,6 @@
 using STMData.Exceptions;
 using STMData.Repositories.Interfaces;
 using STMDomain.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace STMData.Repositories.Implementations
 {
@@ -53,12 +48,12 @@ namespace STMData.Repositories.Implementations
 
             return await _context.PersonalDatas
                                 .Include(p => p.Education)
-                                .Include(p => p.GenderIdentity)
+                                .Include(p => p.Gender)
                                 .Include(p => p.Address)
                                 .Include(p => p.Contacts)
                                 .Include(p => p.FamilyData)
                                 .Include(p => p.MaritalStatus)
-                                .Include(p => p.SocialPrograms)
+                                .Include(p => p.SocialBenefits)
                                 .Include(p => p.Status)
                                 .Include(p => p.SexualOrientation)
                                 .ToListAsync();

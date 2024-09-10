@@ -2,15 +2,17 @@
 using STMData;
 
 using STMData.DependencyInjection;
-using STMApi.Endpoints;
-using STMApi.DependencyInjection;
+using STMComunication.Endpoints;
+using STMComunication.DependencyInjection;
 using System.Text.Json.Serialization;
-using STMApi.Security;
+using STMComunication.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using STMApi.Errors;
+using STMComunication.Errors;
+using AutoMapper;
+using STMComunication.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDependencyInjectionApi();
 builder.Services.AddDependencyInjectionData();
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+IMapper mapper = MappingConfigure.AddMapperConfigure().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddAuthorization(options =>
 {

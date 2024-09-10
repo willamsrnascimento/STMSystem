@@ -1,18 +1,39 @@
-﻿using STMApi.Errors.Exceptions;
-using STMApi.Services.Interfaces;
+﻿using AutoMapper;
+using STMComunication.Dtos;
+using STMComunication.Errors.Exceptions;
+using STMComunication.Services.Interfaces;
 using STMData.Repositories.Interfaces;
 using STMDomain.Domain;
 
-namespace STMApi.Services.Implementations
+namespace STMComunication.Services.Implementations
 {
     public class PersonalDataService : IPersonalDataService
     {
-        private IPersonalDataRepository _personalDataRepository;
+        private readonly IPersonalDataRepository _personalDataRepository;
+        private readonly IMapper _mapper;
 
-        public PersonalDataService(IPersonalDataRepository personalDataRepository)
+        public PersonalDataService(IPersonalDataRepository personalDataRepository, IMapper mapper)
         {
             _personalDataRepository = personalDataRepository;
+            _mapper = mapper;
         }
+
+        public async Task CreateAsync2(PersonalDataRequestDto entity)
+        {
+            try
+            {
+
+                var personalData = _mapper.Map<PersonalData>(entity);
+                await _personalDataRepository.CreateAsync(personalData);
+            }
+            catch (DbConcurrencyException)
+            {
+                throw new DbConcurrencyException("Error on conecting to database.");
+            }
+        }
+
+
+
 
         public async Task CreateAsync(PersonalData entity)
         {
@@ -54,7 +75,8 @@ namespace STMApi.Services.Implementations
         {
             try
             {
-                return await _personalDataRepository.GetByIdAsync(id);
+                var personalData = await _personalDataRepository.GetByIdAsync(id);
+                return personalData;
             }
             catch (DbConcurrencyException)
             {

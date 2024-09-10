@@ -1,4 +1,4 @@
-﻿namespace STMApi.Errors.Exceptions
+﻿namespace STMComunication.Errors.Exceptions
 {
     public class DbConcurrencyException : Exception
     {

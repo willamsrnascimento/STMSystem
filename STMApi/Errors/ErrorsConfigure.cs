@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Data.SqlClient;
 
-namespace STMApi.Errors
+namespace STMComunication.Errors
 {
     public static class ErrorsConfigure
     {

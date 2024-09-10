@@ -130,7 +130,14 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\will_\\source\\repos\\STMSystem\\STMData\\STMData.csproj": {
+                "projectPath": "C:\\Users\\will_\\source\\repos\\STMSystem\\STMData\\STMData.csproj"
+              },
+              "C:\\Users\\will_\\source\\repos\\STMSystem\\STMDomain\\STMDomain.csproj": {
+                "projectPath": "C:\\Users\\will_\\source\\repos\\STMSystem\\STMDomain\\STMDomain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -142,6 +149,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

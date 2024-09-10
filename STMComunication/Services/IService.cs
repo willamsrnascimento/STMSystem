@@ -1,4 +1,4 @@
-﻿namespace STMApi.Services
+﻿namespace STMComunication.Services
 {
     public interface IService<T> where T : class
     {

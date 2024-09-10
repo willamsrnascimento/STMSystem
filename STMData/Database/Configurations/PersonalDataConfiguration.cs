@@ -35,7 +35,7 @@ namespace STMData.Database.Configurations
                 .HasMaxLength(15)
                 .IsRequired(false);
 
-            builder.HasMany(p => p.SocialPrograms)
+            builder.HasMany(p => p.SocialBenefits)
                 .WithMany(s => s.PersonalDatas)
                 .UsingEntity(
                     "PersonalDataSocialProgram",
@@ -48,9 +48,9 @@ namespace STMData.Database.Configurations
                 .HasForeignKey("EducationId")
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(p => p.GenderIdentity)
+            builder.HasOne(p => p.Gender)
                 .WithMany(g => g.PersonalDatas)
-                .HasForeignKey("GenderIdentityId")
+                .HasForeignKey("GenderId")
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(p => p.SexualOrientation)

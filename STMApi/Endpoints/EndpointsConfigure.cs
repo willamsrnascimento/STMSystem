@@ -1,18 +1,18 @@
-﻿using STMApi.Endpoints.UserEndpoint;
-using STMApi.Endpoints.UserEndpoit;
+﻿using STMComunication.Endpoints.UserEndpoint;
+using STMComunication.Endpoints.UserEndpoit;
 
-namespace STMApi.Endpoints
+namespace STMComunication.Endpoints
 {
     public static class EndpointsConfigure
     {
-        private static string TemplatePersonalData = "/PersonalDatas";
-        private static string TemplateLogin = "/Login";
-        private static string TemplateUser = "/User";
+        private const string TemplatePersonalData = "/PersonalDatas";
+        private const string TemplateUser = "/User";
         public static void EndpointConfigure(this WebApplication app)
         {
             app.MapGet(TemplatePersonalData, PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetAllAsync);
-            app.MapGet(TemplatePersonalData + "{id:long}", PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetByIdAsync);
-            app.MapPost(TemplateLogin, LoginReadOnlyEndpoint.Login);
+            app.MapGet(TemplatePersonalData + "/{id:long}", PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetByIdAsync);
+            app.MapPost(TemplatePersonalData, PersonalDataEndpoint.PersonalDataWriteOnlyEndpoint.PostAsync);
+            app.MapPost(TemplateUser + "/Login", UserWriteOnlyEndpoint.LoginAsync);
             app.MapPost(TemplateUser, UserWriteOnlyEndpoint.CreateUserAsync);
 
         }

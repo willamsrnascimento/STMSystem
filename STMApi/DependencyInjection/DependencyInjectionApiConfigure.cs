@@ -1,7 +1,7 @@
-﻿using STMApi.Services.Implementations;
-using STMApi.Services.Interfaces;
+﻿using STMComunication.Services.Implementations;
+using STMComunication.Services.Interfaces;
 
-namespace STMApi.DependencyInjection
+namespace STMComunication.DependencyInjection
 {
     public static class DependencyInjectionApiConfigure
     {

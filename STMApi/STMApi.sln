@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STMData", "..\STMData\STMDa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STMDomain", "..\STMDomain\STMDomain.csproj", "{58F47DA7-6D21-4D3A-BBD9-0274F8ED2AB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STMComunication", "..\STMComunication\STMComunication.csproj", "{6F385637-4CD4-46EE-9C5B-D90695A77E79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STMComunication", "..\STMComunication\STMComunication.csproj", "{6F385637-4CD4-46EE-9C5B-D90695A77E79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STMTests", "..\STMTests\STMTests.csproj", "{50896E03-DF17-4930-8579-F03E0B29CCFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6F385637-4CD4-46EE-9C5B-D90695A77E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F385637-4CD4-46EE-9C5B-D90695A77E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F385637-4CD4-46EE-9C5B-D90695A77E79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50896E03-DF17-4930-8579-F03E0B29CCFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50896E03-DF17-4930-8579-F03E0B29CCFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50896E03-DF17-4930-8579-F03E0B29CCFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50896E03-DF17-4930-8579-F03E0B29CCFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

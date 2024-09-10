@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using STMData;
 
-namespace STMApi.Security
+namespace STMComunication.Security
 {
     public static class SecurityConfigure
     {

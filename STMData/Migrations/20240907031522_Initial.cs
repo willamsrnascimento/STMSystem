@@ -368,7 +368,7 @@ namespace STMData.Migrations
                     Age = table.Column<int>(type: "int", precision: 1, scale: 150, nullable: false),
                     Occupancy = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     EducationId = table.Column<long>(type: "bigint", nullable: true),
-                    GenderIdentityId = table.Column<long>(type: "bigint", nullable: true),
+                    GenderId = table.Column<long>(type: "bigint", nullable: true),
                     SexualOrientationId = table.Column<long>(type: "bigint", nullable: true),
                     MaritalStatusId = table.Column<long>(type: "bigint", nullable: true),
                     ResponsibleCpf = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
@@ -399,8 +399,8 @@ namespace STMData.Migrations
                         principalTable: "FamilyData",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PersonalData_Gender_GenderIdentityId",
-                        column: x => x.GenderIdentityId,
+                        name: "FK_PersonalData_Gender_GenderId",
+                        column: x => x.GenderId,
                         principalTable: "Gender",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -570,9 +570,9 @@ namespace STMData.Migrations
                 filter: "[FamilyDataId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonalData_GenderIdentityId",
+                name: "IX_PersonalData_GenderId",
                 table: "PersonalData",
-                column: "GenderIdentityId");
+                column: "GenderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonalData_MaritalStatusId",

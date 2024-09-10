@@ -1,6 +1,6 @@
 ﻿using STMComunication.Dtos;
 
-namespace STMApi.Services.Interfaces
+namespace STMComunication.Services.Interfaces
 {
     public interface IUserService
     {

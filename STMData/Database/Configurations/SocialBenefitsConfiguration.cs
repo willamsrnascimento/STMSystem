@@ -24,7 +24,7 @@ namespace STMData.Database.Configurations
                 .HasDefaultValue(null);
 
             builder.HasMany(s => s.PersonalDatas)
-                .WithMany(p => p.SocialPrograms);
+                .WithMany(p => p.SocialBenefits);
              
         }
     }

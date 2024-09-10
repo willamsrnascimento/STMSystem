@@ -1,13 +1,13 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace STMApi.Security.Token
+namespace STMComunication.Token
 {
     public static class TokenGenerator
     {
-
         public static string GenerateToken(ClaimsIdentity claimsIdentity)
         {
             var configure = new ConfigurationBuilder()
@@ -23,7 +23,7 @@ namespace STMApi.Security.Token
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
                 Audience = configure["JwtBearerTokenSetting:Audience"],
                 Issuer = configure["JwtBearerTokenSetting:Issuer"],
-                Expires = DateTime.UtcNow.AddSeconds(60)
+                Expires = DateTime.UtcNow.AddSeconds(220)
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

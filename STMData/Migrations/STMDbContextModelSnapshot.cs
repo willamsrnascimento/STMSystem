@@ -562,7 +562,7 @@ namespace STMData.Migrations
                     b.Property<long?>("FamilyDataId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("GenderIdentityId")
+                    b.Property<long?>("GenderId")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("MaritalStatusId")
@@ -606,7 +606,7 @@ namespace STMData.Migrations
                         .IsUnique()
                         .HasFilter("[FamilyDataId] IS NOT NULL");
 
-                    b.HasIndex("GenderIdentityId");
+                    b.HasIndex("GenderId");
 
                     b.HasIndex("MaritalStatusId");
 
@@ -899,9 +899,9 @@ namespace STMData.Migrations
                         .WithOne("PersonalData")
                         .HasForeignKey("STMDomain.Domain.PersonalData", "FamilyDataId");
 
-                    b.HasOne("STMDomain.Domain.Gender", "GenderIdentity")
+                    b.HasOne("STMDomain.Domain.Gender", "Gender")
                         .WithMany("PersonalDatas")
-                        .HasForeignKey("GenderIdentityId")
+                        .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("STMDomain.Domain.MaritalStatus", "MaritalStatus")
@@ -926,7 +926,7 @@ namespace STMData.Migrations
 
                     b.Navigation("FamilyData");
 
-                    b.Navigation("GenderIdentity");
+                    b.Navigation("Gender");
 
                     b.Navigation("MaritalStatus");
 

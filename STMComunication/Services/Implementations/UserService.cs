@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using STMApi.Security.Token;
-using STMApi.Services.Interfaces;
+using STMComunication.Token;
+using STMComunication.Services.Interfaces;
 using STMComunication.Dtos;
 using System.Security.Claims;
 
-namespace STMApi.Services.Implementations
+namespace STMComunication.Services.Implementations
 {
     public class UserService : IUserService
     {

@@ -1,7 +1,7 @@
-﻿using STMApi.Services.Implementations;
-using STMApi.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using STMComunication.Services.Interfaces;
 
-namespace STMApi.Endpoints.PersonalDataEndpoint
+namespace STMComunication.Endpoints.PersonalDataEndpoint
 {
     public static class PersonalDataReadOnlyEndpoint
     {
@@ -10,7 +10,7 @@ namespace STMApi.Endpoints.PersonalDataEndpoint
             return Results.Ok(await personalDataService.GetAllAsync());
         }
 
-        public static async Task<IResult> GetByIdAsync(long id, IPersonalDataService personalDataService)
+        public static async Task<IResult> GetByIdAsync([FromRoute] long id, IPersonalDataService personalDataService)
         {
             return Results.Ok(await personalDataService.GetByIdAsync(id));
         }
