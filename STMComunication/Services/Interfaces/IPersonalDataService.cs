@@ -1,12 +1,8 @@
-﻿using STMComunication.Dtos;
-using STMDomain.Domain;
+﻿using STMDomain.Domain;
 
 namespace STMComunication.Services.Interfaces
 {
-    public interface IPersonalDataService : IService<PersonalData>
-    {
-        Task CreateAsync2(PersonalDataRequestDto entity);
-       
-            
+    public interface IPersonalDataService : IServiceWriteOnly<PersonalData>, IServiceReadOnly<PersonalData>
+    {        
     }
 }

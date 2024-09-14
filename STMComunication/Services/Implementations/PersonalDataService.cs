@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using STMComunication.Dtos;
-using STMComunication.Errors.Exceptions;
+﻿using STMComunication.Errors.Exceptions;
 using STMComunication.Services.Interfaces;
 using STMData.Repositories.Interfaces;
 using STMDomain.Domain;
@@ -10,48 +8,18 @@ namespace STMComunication.Services.Implementations
     public class PersonalDataService : IPersonalDataService
     {
         private readonly IPersonalDataRepository _personalDataRepository;
-        private readonly IMapper _mapper;
 
-        public PersonalDataService(IPersonalDataRepository personalDataRepository, IMapper mapper)
+        public PersonalDataService(IPersonalDataRepository personalDataRepository)
         {
             _personalDataRepository = personalDataRepository;
-            _mapper = mapper;
         }
 
-        public async Task CreateAsync2(PersonalDataRequestDto entity)
+        public async Task<PersonalData> CreateAsync(PersonalData entity)
         {
             try
-            {
-
-                var personalData = _mapper.Map<PersonalData>(entity);
-                await _personalDataRepository.CreateAsync(personalData);
-            }
-            catch (DbConcurrencyException)
-            {
-                throw new DbConcurrencyException("Error on conecting to database.");
-            }
-        }
-
-
-
-
-        public async Task CreateAsync(PersonalData entity)
-        {
-            try
-            {
+            {             
                 await _personalDataRepository.CreateAsync(entity);
-            }
-            catch (DbConcurrencyException)
-            {
-                throw new DbConcurrencyException("Error on conecting to database.");
-            }
-        }
-
-        public async Task DeleteAsync(long id)
-        {
-            try
-            {
-                await _personalDataRepository.DeleteAsync(id);
+                return entity;
             }
             catch (DbConcurrencyException)
             {
@@ -84,11 +52,24 @@ namespace STMComunication.Services.Implementations
             }
         }
 
-        public async Task UpdateAsync(PersonalData entity)
+        public async Task<PersonalData> UpdateAsync(PersonalData entity)
         {
             try
             {
                 await _personalDataRepository.UpdateAsync(entity);
+                return entity;
+            }
+            catch (DbConcurrencyException)
+            {
+                throw new DbConcurrencyException("Error on conecting to database.");
+            }
+        }
+        public async Task<bool> DeleteAsync(long id)
+        {
+            try
+            {
+                await _personalDataRepository.DeleteAsync(id);
+                return true;
             }
             catch (DbConcurrencyException)
             {

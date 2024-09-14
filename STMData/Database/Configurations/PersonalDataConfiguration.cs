@@ -39,8 +39,8 @@ namespace STMData.Database.Configurations
                 .WithMany(s => s.PersonalDatas)
                 .UsingEntity(
                     "PersonalDataSocialProgram",
-                    p => p.HasOne(typeof(SocialBenefits)).WithMany().HasForeignKey("SocialProgramId").HasPrincipalKey(nameof(SocialBenefits.Id)).OnDelete(DeleteBehavior.Restrict),
-                    s => s.HasOne(typeof(PersonalData)).WithMany().HasForeignKey("PersonalDataId").HasPrincipalKey(nameof(PersonalData.Id)).OnDelete(DeleteBehavior.Restrict)
+                    p => p.HasOne(typeof(SocialBenefits)).WithMany().HasForeignKey("SocialProgramId").HasPrincipalKey(nameof(SocialBenefits.Id)).OnDelete(DeleteBehavior.ClientCascade),
+                    s => s.HasOne(typeof(PersonalData)).WithMany().HasForeignKey("PersonalDataId").HasPrincipalKey(nameof(PersonalData.Id)).OnDelete(DeleteBehavior.ClientCascade)
                 ); ;
 
             builder.HasOne(p => p.Education)
@@ -66,17 +66,17 @@ namespace STMData.Database.Configurations
             builder.HasMany(p => p.Contacts)
                 .WithOne(c => c.PersonalData)
                 .HasForeignKey("PersonalDataId")
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.HasOne(p => p.Address)
                 .WithOne(a => a.PersonalData)
                 .HasForeignKey<PersonalData>(p => p.AddressId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(p => p.FamilyData)
                 .WithOne(f => f.PersonalData)
                 .HasForeignKey<PersonalData>(p => p.FamilyDataId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.NoAction);
                 
         }
     }

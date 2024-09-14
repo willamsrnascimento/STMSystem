@@ -18,7 +18,7 @@ namespace STMComunication.Endpoints.UserEndpoint
 
             if (result == null)
             {
-                return Results.BadRequest("Password or username incorrect");
+                return Results.BadRequest("Password or username incorrect.");
             }
 
             return Results.Ok(result);

@@ -9,6 +9,9 @@ namespace STMData.DependencyInjection
         public static void AddDependencyInjectionData(this IServiceCollection services)
         {
             services.AddScoped<IPersonalDataRepository, PersonalDataRepository>();
+            services.AddScoped<ISocialBenefitsRepository, SocialBenefitsRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IFamilyDataRepository, FamilyDataRepository>();
         }
     }
 }

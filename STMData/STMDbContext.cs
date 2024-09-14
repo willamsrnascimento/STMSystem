@@ -10,6 +10,8 @@ namespace STMData
     {
         public DbSet<PersonalData> PersonalDatas { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<SocialBenefits> SocialBenefits { get; set; }
+        public DbSet<FamilyData> FamilyDatas { get; set; }
 
         public STMDbContext(DbContextOptions<STMDbContext> options) : base(options)
         {

@@ -45,7 +45,7 @@ namespace STMData.Repositories.Implementations
 
         public async Task<IEnumerable<Address>> GetAllAsync()
         {
-            if(! await _context.Addresses.AnyAsync())
+            if(! await _context.Addresses.AsNoTracking().AnyAsync())
             {
                 throw new DbDataNotFoundException($"No data found.");
             }

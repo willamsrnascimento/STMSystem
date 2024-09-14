@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using STMComunication.Dtos;
+using STMComunication.Dtos.PersonalData;
 using STMDomain.Domain;
 
 namespace STMComunication.Mappings
@@ -16,13 +17,15 @@ namespace STMComunication.Mappings
                 config.CreateMap<FamilyDataRequestDto, FamilyData>();
 
 
-                config.CreateMap<PersonalDataRequestDto, PersonalData>()
+                config.CreateMap<PersonalDataPostDto, PersonalData>()
                 .ForMember(dst => dst.Contacts, src => src.MapFrom(src => src.Contacts))
                 .ForMember(dst => dst.SocialBenefits, src => src.MapFrom(src => src.SocialBenefits))
                 .ForMember(dst => dst.Address, src => src.MapFrom(src => src.Address))
                 .ForMember(dst => dst.FamilyData, src => src.MapFrom(src => src.FamilyData));
 
-                config.CreateMap<PersonalData, PersonalDataRequestDto>();
+                config.CreateMap<PersonalDataPutDto, PersonalData>();
+
+                config.CreateMap<PersonalData, PersonalDataPostDto>();
             });
 
             return mappingConfigure;

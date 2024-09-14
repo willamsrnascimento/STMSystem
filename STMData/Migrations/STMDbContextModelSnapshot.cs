@@ -260,8 +260,8 @@ namespace STMData.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -295,8 +295,8 @@ namespace STMData.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("UpdatedBy")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -318,8 +318,8 @@ namespace STMData.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -343,8 +343,8 @@ namespace STMData.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("UpdatedBy")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -368,8 +368,8 @@ namespace STMData.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -383,8 +383,8 @@ namespace STMData.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("UpdatedBy")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -412,8 +412,8 @@ namespace STMData.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -436,8 +436,8 @@ namespace STMData.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("UpdatedBy")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -459,8 +459,8 @@ namespace STMData.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -474,8 +474,8 @@ namespace STMData.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("UpdatedBy")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -497,8 +497,8 @@ namespace STMData.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -512,8 +512,8 @@ namespace STMData.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("UpdatedBy")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -550,8 +550,8 @@ namespace STMData.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -589,8 +589,8 @@ namespace STMData.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("UpdatedBy")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -627,8 +627,8 @@ namespace STMData.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -642,8 +642,8 @@ namespace STMData.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("UpdatedBy")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -665,8 +665,8 @@ namespace STMData.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -690,8 +690,8 @@ namespace STMData.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("UpdatedBy")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -713,8 +713,8 @@ namespace STMData.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -733,8 +733,8 @@ namespace STMData.Migrations
                         .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("UpdatedBy")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -800,13 +800,13 @@ namespace STMData.Migrations
                     b.HasOne("STMDomain.Domain.PersonalData", null)
                         .WithMany()
                         .HasForeignKey("PersonalDataId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("STMDomain.Domain.SocialBenefits", null)
                         .WithMany()
                         .HasForeignKey("SocialProgramId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 
@@ -826,6 +826,7 @@ namespace STMData.Migrations
                     b.HasOne("STMDomain.Domain.PersonalData", "PersonalData")
                         .WithMany("Contacts")
                         .HasForeignKey("PersonalDataId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("STMDomain.Domain.Status", "Status")
@@ -888,6 +889,7 @@ namespace STMData.Migrations
                     b.HasOne("STMDomain.Domain.Address", "Address")
                         .WithOne("PersonalData")
                         .HasForeignKey("STMDomain.Domain.PersonalData", "AddressId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("STMDomain.Domain.Education", "Education")
@@ -897,7 +899,8 @@ namespace STMData.Migrations
 
                     b.HasOne("STMDomain.Domain.FamilyData", "FamilyData")
                         .WithOne("PersonalData")
-                        .HasForeignKey("STMDomain.Domain.PersonalData", "FamilyDataId");
+                        .HasForeignKey("STMDomain.Domain.PersonalData", "FamilyDataId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("STMDomain.Domain.Gender", "Gender")
                         .WithMany("PersonalDatas")

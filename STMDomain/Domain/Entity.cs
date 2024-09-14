@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using STMDomain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace STMDomain.Domain
 {
@@ -6,11 +7,11 @@ namespace STMDomain.Domain
     {
         public long Id { get; set; }
 
-        [StringLength(15)]
-        public string CreatedBy { get; set; }   
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        [StringLength(60)]
+        public string CreatedBy { get; set; }    
+        public DateTime CreatedOn { get; set; }
 
-        [StringLength(15)]
+        [StringLength(60)]
         public string? UpdatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public long StatusId { get; set; }
@@ -18,7 +19,9 @@ namespace STMDomain.Domain
 
         public Entity()
         {
-            CreatedOn = DateTime.Now;
+            CreatedOn = DateTime.UtcNow;
+            StatusId = (long) StatusEnum.Active; 
+
         }
     }
 }

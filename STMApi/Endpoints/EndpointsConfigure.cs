@@ -12,6 +12,8 @@ namespace STMComunication.Endpoints
             app.MapGet(TemplatePersonalData, PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetAllAsync);
             app.MapGet(TemplatePersonalData + "/{id:long}", PersonalDataEndpoint.PersonalDataReadOnlyEndpoint.GetByIdAsync);
             app.MapPost(TemplatePersonalData, PersonalDataEndpoint.PersonalDataWriteOnlyEndpoint.PostAsync);
+            app.MapPut(TemplatePersonalData, PersonalDataEndpoint.PersonalDataWriteOnlyEndpoint.PutAsync);
+            app.MapDelete(TemplatePersonalData + "/{id:long}", PersonalDataEndpoint.PersonalDataWriteOnlyEndpoint.DeleteAsync);
             app.MapPost(TemplateUser + "/Login", UserWriteOnlyEndpoint.LoginAsync);
             app.MapPost(TemplateUser, UserWriteOnlyEndpoint.CreateUserAsync);
 

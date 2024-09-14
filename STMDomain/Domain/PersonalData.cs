@@ -1,4 +1,6 @@
-﻿namespace STMDomain.Domain
+﻿using STMDomain.Enums;
+
+namespace STMDomain.Domain
 {
     public class PersonalData : Entity
     {
@@ -23,7 +25,26 @@
         public long? FamilyDataId { get; set; }
         public FamilyData? FamilyData { get; set; }
 
+        public void SetCreatedBy(string id)
+        {
+            CreatedBy = id;
+            Address.CreatedBy = id;
 
+            if(FamilyData != null)
+            {
+                FamilyData.CreatedBy = id;
+            }
 
+            foreach (var item in Contacts)
+            {
+                item.CreatedBy = id;               
+            }
+        }
+        
+        public void SetUpdateddByAndUpdatedOn (string id)
+        {
+            UpdatedBy = id;
+            UpdatedOn = DateTime.UtcNow;
+        }
     }
 }

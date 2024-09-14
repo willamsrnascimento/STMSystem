@@ -12,17 +12,17 @@ namespace STMTests
         {
             using (var mock = AutoMock.GetLoose())
             {
-                //mock.Mock<IPersonalDataService>()
-                //    .Setup(x => x.GetByIdAsync(1))
-                //    .Returns(GetSamplePersonalData());
+                mock.Mock<IPersonalDataService>()
+                    .Setup(x => x.GetByIdAsync(1))
+                    .Returns(GetSamplePersonalData());
 
-                ////var cls = mock.Create<PersonalDataService>();
-                //var expected = GetSamplePersonalData();
+                var cls = mock.Create<PersonalDataService>();
+                var expected = GetSamplePersonalData();
 
-                //var actual = cls.GetByIdAsync(1);
+                var actual = cls.GetByIdAsync(1);
 
-                //Assert.True(actual != null);
-               // Assert.Equal(expected.Result.Id, actual.Result.Id);
+                Assert.True(actual != null);
+                //Assert.Equal(expected.Result.Id, actual.Result.Id);
             };
         }
         private async Task<PersonalData> GetSamplePersonalData()
