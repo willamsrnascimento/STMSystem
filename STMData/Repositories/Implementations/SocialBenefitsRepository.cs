@@ -14,31 +14,73 @@ namespace STMData.Repositories.Implementations
             _context = context;
         }
 
-        public Task CreateAsync(SocialBenefits entity)
+        public async Task CreateAsync(SocialBenefits entity)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                await _context.SocialBenefits.AddAsync(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch 
+            {
+                throw new DbCreateException($"Erro while creating a new entity name of {nameof(SocialBenefits)}");
+            }
         }
 
-        public Task DeleteAsync(long id)
+        public async Task DeleteAsync(long id)
         {
-            throw new NotImplementedException();
+            var socialBenefit = _context.SocialBenefits.AsNoTracking().FirstOrDefault(s => s.Id == id);
+
+            if (socialBenefit == null)
+            {
+                throw new DbDataNotFoundException($"Data not found which id is {id}");
+            }
+
+            try
+            {
+                _context.SocialBenefits.Remove(socialBenefit);
+                await _context.SaveChangesAsync();
+            }
+            catch 
+            {
+                throw new DbDeleteException($"An error occured while executing delete on method {nameof(DeleteAsync)}" +
+                                            $"in {nameof(SocialBenefitsRepository)}") ;
+            }
         }
 
-        public Task<IEnumerable<SocialBenefits>> GetAllAsync()
+        public async Task<IEnumerable<SocialBenefits>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            if (!await _context.SocialBenefits.AsNoTracking().AnyAsync())
+            {
+                throw new DbDataNotFoundException($"No data found in {nameof(SocialBenefits)} table.");
+            }
+
+            return await _context.SocialBenefits.ToListAsync();
         }
 
-        public Task<SocialBenefits> GetByIdAsync(long id)
+        public async Task<SocialBenefits> GetByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            if(! await _context.SocialBenefits.AsNoTracking().AnyAsync())
+            {
+                throw new DbDataNotFoundException($"No data found in {nameof(SocialBenefits)} table.");
+            }
+
+            var socialBenefits = await _context.SocialBenefits.FirstOrDefaultAsync(s => s.Id == id);
+
+            if (socialBenefits == null)
+            {
+                throw new DbDataNotFoundException($"No data found in {nameof(SocialBenefits)} table and id {id}.");
+            }
+
+            return socialBenefits;
         }
 
         public async Task<ICollection<SocialBenefits>> GetSocialBenefitsByIdListAsync(ICollection<SocialBenefits> socialBenefits)
         {
             if(!await _context.SocialBenefits.AsNoTracking().AnyAsync())
             {
-                throw new DbDataNotFoundException("No data found in SocialBenefits table");
+                throw new DbDataNotFoundException($"No data found in {nameof(SocialBenefits)} table.");
             }
 
             List<long> ids = socialBenefits.Select(s => s.Id).ToList();
@@ -47,9 +89,25 @@ namespace STMData.Repositories.Implementations
             return socialBenefitsSelected;
         }
 
-        public Task UpdateAsync(SocialBenefits entity)
+        public async Task UpdateAsync(SocialBenefits entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+            {
+                throw new ArgumentNullException($"Erro while executing the method {nameof(UpdateAsync)}. " +
+                                                $"The named object {nameof(entity)} cannot be null.");
+            }
+
+            try
+            {
+                _context.SocialBenefits.Attach(entity);
+                _context.Entry(entity).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new DbDeleteException($"An error occured while executing update on method {nameof(UpdateAsync)}" +
+                                            $"in {nameof(SocialBenefitsRepository)}");
+            }
         }
     }
 }

@@ -89,7 +89,8 @@ namespace STMData.Repositories.Implementations
 
         public async Task<PersonalData> GetByIdAsync(long id)
         {
-            var personalData = await _context.PersonalDatas.Include(p => p.Education)
+            var personalData = await _context.PersonalDatas
+                                .Include(p => p.Education)
                                 .Include(p => p.Gender)
                                 .Include(p => p.Address)
                                 .Include(p => p.Contacts)
@@ -97,7 +98,8 @@ namespace STMData.Repositories.Implementations
                                 .Include(p => p.MaritalStatus)
                                 .Include(p => p.SocialBenefits)
                                 .Include(p => p.Status)
-                                .Include(p => p.SexualOrientation).FirstOrDefaultAsync(p => p.Id == id);
+                                .Include(p => p.SexualOrientation)
+                                .FirstOrDefaultAsync(p => p.Id == id);
 
             if (personalData == null)
             {

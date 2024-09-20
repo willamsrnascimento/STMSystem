@@ -6,6 +6,6 @@
         public string Detail { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public ICollection<PersonalData> PersonalDatas { get; set; }
+        public virtual ICollection<PersonalData> PersonalDatas { get; set; }
     }
 }

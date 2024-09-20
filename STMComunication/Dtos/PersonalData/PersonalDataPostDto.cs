@@ -1,4 +1,6 @@
-﻿namespace STMComunication.Dtos.PersonalData
+﻿using STMComunication.Dtos.SocialBenefits;
+
+namespace STMComunication.Dtos.PersonalData
 {
     public record PersonalDataPostDto
     {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Data.SqlClient;
+using STMData.Exceptions;
 
 namespace STMComunication.Errors
 {
@@ -18,6 +19,9 @@ namespace STMComunication.Errors
                         return Results.Problem(title: "Database out", statusCode: 500);
                     else if (error is BadHttpRequestException)
                         return Results.Problem(title: "Error to convert data to other type. See all the information sent", statusCode: 500);
+                    else if(error is DbDataNotFoundException)
+                        return Results.Problem(title: "No data found", statusCode: 404);
+
                 }
 
                 return Results.Problem(title: "An error ocurred", statusCode: 500);

@@ -15,7 +15,7 @@ namespace STMDomain.Domain
         public string? UpdatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public long StatusId { get; set; }
-        public Status Status { get; set; }
+        public virtual Status Status { get; set; }
 
         public Entity()
         {

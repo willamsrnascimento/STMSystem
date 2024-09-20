@@ -1,18 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using STMComunication.Dtos.PersonalData;
 using STMComunication.Services.Interfaces;
 
 namespace STMComunication.Endpoints.PersonalDataEndpoint
 {
     public static class PersonalDataReadOnlyEndpoint
     {
-        public static async Task<IResult> GetAllAsync(IPersonalDataService personalDataService)
+        public static async Task<IResult> GetAllAsync(IPersonalDataService personalDataService, IMapper mapper)
         {
-            return Results.Ok(await personalDataService.GetAllAsync());
+            var personalData = await personalDataService.GetAllAsync();
+            ICollection<PersonalDataResponseDto> personalDataResponseDtos = mapper.Map<ICollection<PersonalDataResponseDto>>(personalData);
+
+            return Results.Ok(personalDataResponseDtos);
         }
 
-        public static async Task<IResult> GetByIdAsync([FromRoute] long id, IPersonalDataService personalDataService)
+        public static async Task<IResult> GetByIdAsync([FromRoute] long id, IPersonalDataService personalDataService, IMapper mapper)
         {
-            return Results.Ok(await personalDataService.GetByIdAsync(id));
+            var personalData = await personalDataService.GetByIdAsync(id);
+            PersonalDataResponseDto personalDataResponseDtos = mapper.Map<PersonalDataResponseDto>(personalData);
+
+            return Results.Ok(personalDataResponseDtos);
         }
 
     }
