@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using STMComunication.Token;
 using STMComunication.Services.Interfaces;
-using STMComunication.Dtos;
 using System.Security.Claims;
+using STMComunication.Dtos.User;
+using STMComunication.Dtos.Login;
+using Microsoft.Extensions.Configuration;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace STMComunication.Services.Implementations
 {
@@ -15,7 +19,7 @@ namespace STMComunication.Services.Implementations
             _userManager = userManager;
         }
 
-        public async Task<string> UserLoginAsync(LoginRequestDto loginDto)
+        public async Task<LoginResponseDto> UserLoginAsync(LoginRequestDto loginDto)
         {
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
 
@@ -30,12 +34,20 @@ namespace STMComunication.Services.Implementations
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
             });
 
-            return TokenGenerator.GenerateToken(subject);
+            LoginResponseDto loginResponseDto = new LoginResponseDto
+            {
+                UserName = user.UserName,
+                Name = user.NormalizedUserName,
+                Email = user.Email,
+                Token = GenerateToken(subject),
+            };
+
+            return loginResponseDto;
         }
 
         public async Task<string> CreateUserAsync(UserRequestDto user)
         {
-            var newUser = new IdentityUser { Email = user.Email, UserName = user.NormalizeUserName(), PhoneNumber = user.PhoneNumber };
+            var newUser = new IdentityUser { Email = user.Email, UserName = user.GetSimplifiedUserName(), PhoneNumber = user.PhoneNumber, NormalizedUserName = user.Name};
             var result = await _userManager.CreateAsync(newUser, user.Password);
 
             if (!result.Succeeded)
@@ -44,6 +56,30 @@ namespace STMComunication.Services.Implementations
             }
 
             return newUser.Id;
+        }
+
+        private string GenerateToken(ClaimsIdentity claimsIdentity)
+        {
+            var configure = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var key = Encoding.ASCII.GetBytes(configure["JwtBearerTokenSetting:SecretKey"]);
+
+            var tokenDescription = new SecurityTokenDescriptor
+            {
+                Subject = claimsIdentity,
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Audience = configure["JwtBearerTokenSetting:Audience"],
+                Issuer = configure["JwtBearerTokenSetting:Issuer"],
+                Expires = DateTime.UtcNow.AddSeconds(220)
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescription);
+
+            return tokenHandler.WriteToken(token);
         }
     }
 }

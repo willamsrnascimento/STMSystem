@@ -1,10 +1,11 @@
-﻿using STMComunication.Dtos;
+﻿using STMComunication.Dtos.Login;
+using STMComunication.Dtos.User;
 
 namespace STMComunication.Services.Interfaces
 {
     public interface IUserService
     {
         Task<string> CreateUserAsync(UserRequestDto user);
-        Task<string> UserLoginAsync(LoginRequestDto loginDto);
+        Task<LoginResponseDto> UserLoginAsync(LoginRequestDto loginDto);
     }
 }

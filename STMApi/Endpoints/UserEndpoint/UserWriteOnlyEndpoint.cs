@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using STMComunication.Services.Interfaces;
-using STMComunication.Dtos;
+using STMComunication.Dtos.User;
+using STMComunication.Dtos.Login;
 
 namespace STMComunication.Endpoints.UserEndpoint
 {
@@ -23,7 +24,7 @@ namespace STMComunication.Endpoints.UserEndpoint
 
             return Results.Ok(result);
         }
-        [AllowAnonymous]
+
         public static async Task<IResult> CreateUserAsync([FromBody] UserRequestDto userRequestDto, IUserService userService)
         {
             var result = await userService.CreateUserAsync(userRequestDto);

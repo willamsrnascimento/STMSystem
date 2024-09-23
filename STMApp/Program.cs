@@ -1,7 +1,26 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.CookiePolicy;
+using STMApp.Clients.User;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<IUserClient, UserClient>();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(5);
+});
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new PathString(builder.Configuration["Pages:LoginPage"]);
+                    options.AccessDeniedPath = new PathString(builder.Configuration[""]);
+                });
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 
@@ -18,6 +37,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.Strict,
+    HttpOnly = HttpOnlyPolicy.Always
+});
+
+app.UseAuthentication();
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(

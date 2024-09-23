@@ -13,6 +13,7 @@ using System.Text;
 using STMComunication.Errors;
 using AutoMapper;
 using STMComunication.Mappings;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,33 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSqlServer<STMDbContext>(builder.Configuration["Database:ConnectionString"]);
 builder.Services.AddSecurityConfigure();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "STM Web API", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
+
 builder.Services.AddDependencyInjectionApi();
 builder.Services.AddDependencyInjectionData();
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -34,10 +61,6 @@ builder.Services.AddAuthorization(options =>
         .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
         .RequireAuthenticatedUser()
         .Build();
-    options.AddPolicy("EmployeePolicy", p =>
-                                        p.RequireAuthenticatedUser().RequireClaim("EmployeeCode"));
-    options.AddPolicy("Employee005Policy", p =>
-                                        p.RequireAuthenticatedUser().RequireClaim("EmployeeCode", "005"));
 });
 builder.Services.AddAuthentication(x =>
 {
@@ -57,6 +80,8 @@ builder.Services.AddAuthentication(x =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtBearerTokenSetting:SecretKey"]))
     };
 });
+
+builder.Services.AddMvc();
 
 var app = builder.Build();
 

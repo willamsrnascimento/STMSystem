@@ -1,9 +1,11 @@
-﻿using STMApp.Models;
+﻿using STMApp.Dtos.Login;
+using STMApp.Models;
 using STMApp.Utils;
+using System.Net.Http.Headers;
 
 namespace STMApp.Clients.User
 {
-    public class UserClient
+    public class UserClient : IUserClient
     {
         private readonly HttpClient _httpClient;
 
@@ -13,17 +15,17 @@ namespace STMApp.Clients.User
             _httpClient.BaseAddress = new Uri("https://localhost:7034");
         }
 
-        public async Task<LoginModel> GetLogin(LoginModel loginModel)
+        public async Task<LoginResponseDto> GetLogin(LoginRequestDto login)
 
         {
-            var result = await _httpClient.PutAsJsonAsync("/User/Login", loginModel);
+            var result = await _httpClient.PostAsJson("/User/Login", login);
 
-            if (result.IsSuccessStatusCode)
+            if (!result.IsSuccessStatusCode)
             {
-                return await result.ReadContentAs<LoginModel>();
+                throw new Exception("Something went wrong when calling the api");
             }
 
-            return null;
+            return await result.ReadContentAs<LoginResponseDto>();
         }
     }
 }
