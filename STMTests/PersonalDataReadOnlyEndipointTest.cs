@@ -1,5 +1,5 @@
 using Autofac.Extras.Moq;
-using STMComunication.Services.Implementations;
+using STMComunication.Services;
 using STMComunication.Services.Interfaces;
 using STMDomain.Domain;
 

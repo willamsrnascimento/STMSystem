@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using STMComunication.Services.Implementations;
+using STMComunication.Services;
 using STMComunication.Services.Interfaces;
 
 namespace STMComunication.DependencyInjection

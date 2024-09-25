@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using STMComunication.Services.Interfaces;
 using STMComunication.Dtos.User;
 using STMComunication.Dtos.Login;
+using STMApi.Security;
+using System.Security.Cryptography;
 
 namespace STMComunication.Endpoints.UserEndpoint
 {
@@ -25,8 +27,10 @@ namespace STMComunication.Endpoints.UserEndpoint
             return Results.Ok(result);
         }
 
+        [AllowAnonymous]
         public static async Task<IResult> CreateUserAsync([FromBody] UserRequestDto userRequestDto, IUserService userService)
         {
+            userRequestDto.Password = SecurityUtils.ComputeHash(userRequestDto.Password, SHA256.Create());
             var result = await userService.CreateUserAsync(userRequestDto);
 
             if (result == null)

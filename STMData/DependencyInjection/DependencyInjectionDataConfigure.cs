@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using STMData.Repositories.Implementations;
+using STMData.Repositories;
 using STMData.Repositories.Interfaces;
 
 namespace STMData.DependencyInjection

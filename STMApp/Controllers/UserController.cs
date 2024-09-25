@@ -1,19 +1,20 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc;
-using STMApp.Clients.User;
+﻿using Microsoft.AspNetCore.Mvc;
+using STMApp.Clients.Interface;
 using STMApp.Dtos.Login;
-using System.Security.Claims;
+using STMApp.Security;
+using STMApp.Services.Interfaces;
+using System.Security.Cryptography;
 
 namespace STMApp.Controllers
 {
     public class UserController : Controller
     {
         private readonly IUserClient _client;
-
-        public UserController(IUserClient client)
+        private readonly IUserService _userService;
+        public UserController(IUserClient client, IUserService userService)
         {
             _client = client;
+            _userService = userService;
         }
 
         public IActionResult Index()
@@ -26,28 +27,15 @@ namespace STMApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                HttpContext.Session.Clear();
-                var user = await _client.GetLogin(login);
-                HttpContext.Session.SetString("JWToken", user.Token);
-               
-                var claims = new List<Claim>
+                login.Password = SecurityUtils.ComputeHash(login.Password, SHA256.Create());
+                var user = await _client.GetLoginAsync(login);
+
+                if (user == null)
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.UserName),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Name, user.Name)
-                };
+                    return BadRequest();
+                }
 
-                var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
-
-                var authProperties = new AuthenticationProperties
-                {
-                    ExpiresUtc = DateTime.Now.AddHours(2),
-                    IssuedUtc = DateTime.Now,
-                };
-
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
-                
+                await _userService.LoginAsync(HttpContext, user);
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -60,7 +48,7 @@ namespace STMApp.Controllers
         [HttpPost]
         public async Task<IActionResult> LogOut()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await _userService.LoginOutAsync(HttpContext);
 
             return View();
         }
