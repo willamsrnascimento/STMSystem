@@ -12,7 +12,7 @@ using STMData;
 namespace STMData.Migrations
 {
     [DbContext(typeof(STMDbContext))]
-    [Migration("20240923104401_Initial")]
+    [Migration("20241001173149_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

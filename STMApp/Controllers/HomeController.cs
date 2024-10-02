@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using STMApp.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace STMApp.Controllers
 {
@@ -17,6 +18,7 @@ namespace STMApp.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Login = User.FindFirst(ClaimTypes.Name)?.Value;
             return View();
         }
 

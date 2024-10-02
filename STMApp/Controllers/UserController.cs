@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using STMApp.Clients.Interface;
 using STMApp.Dtos.Login;
 using STMApp.Security;
 using STMApp.Services.Interfaces;
@@ -9,11 +8,9 @@ namespace STMApp.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserClient _client;
         private readonly IUserService _userService;
-        public UserController(IUserClient client, IUserService userService)
+        public UserController(IUserService userService)
         {
-            _client = client;
             _userService = userService;
         }
 
@@ -21,21 +18,32 @@ namespace STMApp.Controllers
         {
             return View();
         }
+        
+        public IActionResult Login()
+        {
+            return View();
+        }
 
         [HttpPost]
-        public async Task<IActionResult> Index(LoginRequestDto login)
+        public async Task<IActionResult> Login(LoginRequestDto login)
         {
             if (ModelState.IsValid)
             {
-                login.Password = SecurityUtils.ComputeHash(login.Password, SHA256.Create());
-                var user = await _client.GetLoginAsync(login);
+                var result = await _userService.GetLoginFromClientAsync(login);
 
-                if (user == null)
+                if (result == null)
                 {
                     return BadRequest();
                 }
 
-                await _userService.LoginAsync(HttpContext, user);
+                if (!result.Success)
+                {
+                    TempData["Error"] = result.Message;
+                    return View(login);
+                }
+
+                await _userService.LoginAsync(HttpContext, result.Data);
+                
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -50,7 +58,7 @@ namespace STMApp.Controllers
         {
             await _userService.LoginOutAsync(HttpContext);
 
-            return View();
+            return RedirectToAction("Login");
         }
     }
 }

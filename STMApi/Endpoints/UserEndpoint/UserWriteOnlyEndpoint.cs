@@ -5,26 +5,40 @@ using STMComunication.Dtos.User;
 using STMComunication.Dtos.Login;
 using STMApi.Security;
 using System.Security.Cryptography;
+using STMComunication.Dtos;
 
 namespace STMComunication.Endpoints.UserEndpoint
 {
     public static class UserWriteOnlyEndpoint
     {
         [AllowAnonymous]
-        public static async Task<IResult> LoginAsync([FromBody] LoginRequestDto loginDto, IUserService userService)
+        public static async Task<ApiResultDataDto<LoginResponseDto>> LoginAsync([FromBody] LoginRequestDto loginDto, IUserService userService)
         {
             if (!loginDto.IsValid())
             {
-                return Results.BadRequest("Username and password is required.");
+                return new ApiResultDataDto<LoginResponseDto>()
+                {
+                    Success = false,
+                    Message = "Password or Username invalid."
+                };
             }
             var result = await userService.UserLoginAsync(loginDto);
 
             if (result == null)
             {
-                return Results.BadRequest("Password or username incorrect.");
+                return new ApiResultDataDto<LoginResponseDto>()
+                {
+                    Success = false,
+                    Message = "Password or Username incorrect."
+                };
             }
 
-            return Results.Ok(result);
+            return new ApiResultDataDto<LoginResponseDto>()
+            {
+                Data = result,
+                Success = true,
+                Message = ""
+            };
         }
 
         [AllowAnonymous]

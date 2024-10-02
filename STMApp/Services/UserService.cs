@@ -1,13 +1,24 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using STMApp.Clients.Interface;
+using STMApp.Dtos;
 using STMApp.Dtos.Login;
+using STMApp.Security;
 using STMApp.Services.Interfaces;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace STMApp.Services
 {
     public class UserService : IUserService
     {
+        private readonly IUserClient _userClient;
+
+        public UserService(IUserClient userClient)
+        {
+            _userClient = userClient;
+        }
+
         public async Task LoginAsync(HttpContext context, LoginResponseDto loginResponseDto)
         {
             context.Session.Clear();
@@ -36,6 +47,12 @@ namespace STMApp.Services
         {
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             context.Session.Clear();
+        }
+
+        public async Task<ApiResultDataDto<LoginResponseDto>> GetLoginFromClientAsync(LoginRequestDto login)
+        {
+            login.Password = SecurityUtils.ComputeHash(login.Password, SHA256.Create());
+            return await _userClient.GetLoginAsync(login);
         }
     }
 }

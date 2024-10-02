@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using STMDomain.Domain;
 
 namespace STMComunication.Services
 {
@@ -28,16 +29,20 @@ namespace STMComunication.Services
                 return null;
             }
 
+            var claim = _userManager.GetClaimsAsync(user).Result.FirstOrDefault();
+
             var subject = new ClaimsIdentity(new Claim[]
             {
-                new Claim(ClaimTypes.Name, loginDto.UserName),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, claim.Value)
             });
+
+          
 
             LoginResponseDto loginResponseDto = new LoginResponseDto
             {
                 UserName = user.UserName,
-                Name = user.NormalizedUserName,
+                Name = claim.Value,
                 Email = user.Email,
                 Token = GenerateToken(subject),
             };
@@ -47,12 +52,20 @@ namespace STMComunication.Services
 
         public async Task<string> CreateUserAsync(UserRequestDto user)
         {
-            var newUser = new IdentityUser { Email = user.Email, UserName = user.GetSimplifiedUserName(), PhoneNumber = user.PhoneNumber, NormalizedUserName = user.Name };
+            var newUser = new IdentityUser { Email = user.Email, UserName = user.GetSimplifiedUserName(), PhoneNumber = user.PhoneNumber };
+
             var result = await _userManager.CreateAsync(newUser, user.Password);
 
             if (!result.Succeeded)
             {
                 throw new Exception("It was not possible to create a new user.");
+            }
+
+            var claimResult = await _userManager.AddClaimAsync(newUser, new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"));
+
+            if (!claimResult.Succeeded)
+            {
+                throw new Exception("It was not possible to create a new user. There is a problem in claim inclusion.");
             }
 
             return newUser.Id;

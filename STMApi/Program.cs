@@ -14,11 +14,14 @@ using STMComunication.Errors;
 using AutoMapper;
 using STMComunication.Mappings;
 using Microsoft.OpenApi.Models;
+using STMDomain.Domain;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddSqlServer<STMDbContext>(builder.Configuration["Database:ConnectionString"]);
+
 builder.Services.AddSecurityConfigure();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

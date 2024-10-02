@@ -1,4 +1,5 @@
-﻿using STMApp.Dtos.Login;
+﻿using STMApp.Dtos;
+using STMApp.Dtos.Login;
 
 namespace STMApp.Services.Interfaces
 {
@@ -6,5 +7,6 @@ namespace STMApp.Services.Interfaces
     {
         Task LoginAsync(HttpContext context, LoginResponseDto loginResponseDto);
         Task LoginOutAsync(HttpContext context);
+        Task<ApiResultDataDto<LoginResponseDto>> GetLoginFromClientAsync(LoginRequestDto login);
     }
 }
