@@ -1,8 +1,7 @@
 ﻿using STMApp.Clients.Interface;
 using STMApp.Dtos;
-using STMApp.Dtos.Login;
 using STMApp.Utils;
-using System.Net;
+using System.Net.Http.Headers;
 
 namespace STMApp.Clients
 {
@@ -14,6 +13,20 @@ namespace STMApp.Clients
         {
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri("https://localhost:7034");
+        }
+
+        public async Task<ApiResultDataDto<string>> CreateAsync(UserRequestDto userRequestDto, string token)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var result = await _httpClient.PostAsJson("/User", userRequestDto);
+
+            if (!result.IsSuccessStatusCode)
+            {
+
+                throw new Exception($"Something went wrong when calling the api {result.StatusCode}");
+            }
+
+            return await result.ReadContentAs<ApiResultDataDto<string>>();
         }
 
         public async Task<ApiResultDataDto<LoginResponseDto>> GetLoginAsync(LoginRequestDto login)

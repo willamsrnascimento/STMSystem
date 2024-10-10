@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using STMApp.Clients.Interface;
 using STMApp.Dtos;
-using STMApp.Dtos.Login;
 using STMApp.Security;
 using STMApp.Services.Interfaces;
 using System.Security.Claims;
@@ -22,7 +21,7 @@ namespace STMApp.Services
         public async Task LoginAsync(HttpContext context, LoginResponseDto loginResponseDto)
         {
             context.Session.Clear();
-            context.Session.SetString("JWToken", loginResponseDto.Token);
+            
 
             var claims = new List<Claim>
                 {
@@ -40,6 +39,8 @@ namespace STMApp.Services
                 IssuedUtc = DateTime.Now,
             };
 
+            context.Session.SetString("JWToken", loginResponseDto.Token);
+            context.Session.SetString("UserFullName", loginResponseDto.Name);
             await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
         }
 
@@ -53,6 +54,14 @@ namespace STMApp.Services
         {
             login.Password = SecurityUtils.ComputeHash(login.Password, SHA256.Create());
             return await _userClient.GetLoginAsync(login);
+        }
+
+        public async Task<bool> CreateAsync(UserRequestDto userRequestDto, string token)
+        {
+            userRequestDto.Password = SecurityUtils.ComputeHash(userRequestDto.Password, SHA256.Create());
+            var result = await _userClient.CreateAsync(userRequestDto, token);
+
+            return result.Success;
         }
     }
 }

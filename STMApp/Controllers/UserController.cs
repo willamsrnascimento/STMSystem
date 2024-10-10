@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using STMApp.Dtos.Login;
-using STMApp.Security;
+using STMApp.Dtos;
 using STMApp.Services.Interfaces;
-using System.Security.Cryptography;
 
 namespace STMApp.Controllers
 {
@@ -43,7 +41,7 @@ namespace STMApp.Controllers
                 }
 
                 await _userService.LoginAsync(HttpContext, result.Data);
-                
+
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -53,12 +51,33 @@ namespace STMApp.Controllers
             }        
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> LogOut()
         {
             await _userService.LoginOutAsync(HttpContext);
 
             return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(UserRequestDto userRequestDto)
+        {
+            string token = HttpContext.Session.GetString("JWToken");
+            bool result = await _userService.CreateAsync(userRequestDto, token);
+
+            if (result == false)
+            {
+                return View(userRequestDto);
+            }
+
+            TempData["Message"] = "Usuário criado com sucesso.";
+            return View(new UserRequestDto());
         }
     }
 }

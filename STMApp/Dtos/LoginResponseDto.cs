@@ -1,4 +1,4 @@
-﻿namespace STMApp.Dtos.Login
+﻿namespace STMApp.Dtos
 {
     public record LoginResponseDto
     {

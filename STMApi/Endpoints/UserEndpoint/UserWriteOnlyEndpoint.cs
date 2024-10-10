@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using STMComunication.Services.Interfaces;
 using STMComunication.Dtos.User;
 using STMComunication.Dtos.Login;
-using STMApi.Security;
-using System.Security.Cryptography;
 using STMComunication.Dtos;
 
 namespace STMComunication.Endpoints.UserEndpoint
@@ -19,7 +17,7 @@ namespace STMComunication.Endpoints.UserEndpoint
                 return new ApiResultDataDto<LoginResponseDto>()
                 {
                     Success = false,
-                    Message = "Password or Username invalid."
+                    Message = "Login ou senha inválido."
                 };
             }
             var result = await userService.UserLoginAsync(loginDto);
@@ -29,7 +27,7 @@ namespace STMComunication.Endpoints.UserEndpoint
                 return new ApiResultDataDto<LoginResponseDto>()
                 {
                     Success = false,
-                    Message = "Password or Username incorrect."
+                    Message = "Login ou senha incorreto."
                 };
             }
 
@@ -37,22 +35,41 @@ namespace STMComunication.Endpoints.UserEndpoint
             {
                 Data = result,
                 Success = true,
-                Message = ""
+                Message = "Usuário validado com sucesso."
             };
         }
 
-        [AllowAnonymous]
-        public static async Task<IResult> CreateUserAsync([FromBody] UserRequestDto userRequestDto, IUserService userService)
+        public static async Task<ApiResultDataDto<string>> CreateUserAsync([FromBody] UserRequestDto userRequestDto, IUserService userService)
         {
-            userRequestDto.Password = SecurityUtils.ComputeHash(userRequestDto.Password, SHA256.Create());
-            var result = await userService.CreateUserAsync(userRequestDto);
-
-            if (result == null)
+            try
             {
-                return Results.Problem(title: "It wasnt possible to create a new user", statusCode: 500);
-            }
+                var result = await userService.CreateUserAsync(userRequestDto);
 
-            return Results.Created($"/User/{result}", result);
+                if (result == null)
+                {
+                    return new ApiResultDataDto<string>()
+                    {
+                        Success = false,
+                        Message = $"Houve um problema interno na api ao criar o usuário. O resultado retornou nulo no método {nameof(CreateUserAsync)}."
+                    };
+                }
+
+                return new ApiResultDataDto<string>()
+                {
+                    Success = true,
+                    Message = $"/User/{result}",
+                    Data = result
+                };
+            }
+            catch (Exception e )
+            {
+
+                return new ApiResultDataDto<string>()
+                {
+                    Success = false,
+                    Message = $"Houve um problema interno na api ao criar o usuário. O resultado retornou uma excessão do método {nameof(CreateUserAsync)}. {e.Message}."
+                };
+            }
         }
     }
 }

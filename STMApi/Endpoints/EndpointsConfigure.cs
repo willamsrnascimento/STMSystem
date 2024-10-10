@@ -20,6 +20,7 @@ namespace STMComunication.Endpoints
             app.MapPost(TemplateUser, UserWriteOnlyEndpoint.CreateUserAsync);
             app.MapGet(TemplateSocialBenefits, SocialBenefitsReadOnlyEndpoint.GetAllAsync);
             app.MapGet(TemplateSocialBenefits + "/{id:long}", SocialBenefitsReadOnlyEndpoint.GetByIdAsync);
+            app.MapPost(TemplateSocialBenefits, SocialBenefitsWriteOnlyEndpoint.Create);
 
         }
     }

@@ -16,11 +16,14 @@ using STMComunication.Mappings;
 using Microsoft.OpenApi.Models;
 using STMDomain.Domain;
 using Microsoft.AspNetCore.Identity;
+using STMData.Initializer.Interfaces;
+using STMData.Initializer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddSqlServer<STMDbContext>(builder.Configuration["Database:ConnectionString"]);
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
 builder.Services.AddSecurityConfigure();
 builder.Services.AddEndpointsApiExplorer();
@@ -88,6 +91,13 @@ builder.Services.AddMvc();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+    dbInitializer.Initialize(); // Chama o método para inicializar o banco
+}
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -97,6 +107,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseHttpsRedirection();
 app.UseErrorsConfigure();
 app.EndpointConfigure();

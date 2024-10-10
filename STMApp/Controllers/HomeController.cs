@@ -18,7 +18,6 @@ namespace STMApp.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Login = User.FindFirst(ClaimTypes.Name)?.Value;
             return View();
         }
 

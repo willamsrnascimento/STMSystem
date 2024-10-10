@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace STMApi.Security
+namespace STMData.Security
 {
     internal static class SecurityUtils
     {

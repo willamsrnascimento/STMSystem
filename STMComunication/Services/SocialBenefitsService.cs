@@ -43,8 +43,12 @@ namespace STMComunication.Services
         {
             try
             {
-                var socialBenefits = await _socialBenefitsRepository.GetByIdAsync(id);
-                return socialBenefits;
+                if (id <= 0)
+                {
+                    return null;
+                }
+
+                return await _socialBenefitsRepository.GetByIdAsync(id);
             }
             catch (DbConcurrencyException)
             {
